@@ -2,37 +2,33 @@ from controllers.mysql_controller import MySQLDatabase
 from getpass import getpass
 
 def main():
-    db = MySQLDatabase()
-    while not db.connect():
+    temp = False
+    while not temp:
         print("\nMySQL database")
         print("Connessione al database")
-        host = input("Host 'localhost' (default): ")
-        port = input("Port '3306' (default): ")
-        user = input("User '' (default): ")
-        password = getpass("Password '' (default): ")
-
-        if host == "":
-            if port == "":
-                db = MySQLDatabase(user=user, password=password)
-            else:
-                db = MySQLDatabase(user=user, password=password, port=port)
-        else:
-            if port == "":
-                db = MySQLDatabase(user=user, password=password, host=host)
-            else:
-                db = MySQLDatabase(user=user, password=password, host=host, port=port)
-        db.connect()
+        host = input("Inserire l'host 'localhost' (default): ")
+        port = input("Inserire la porta '3306' (default): ")
+        user = input("Inserire l'username '' (default): ")
+        password = getpass("Inserire la password '' (default): ")
+        if host == '':
+            host = 'localhost'
+        if port == '':
+            port = 3306
+        db = MySQLDatabase(host, port, user, password)
+        temp = db.connected
 
     while True:
         print("\nMySQL database")
         print("Informazioni sulla connessione al database:")
-        print(f"Host: {db.host}")
-        print(f"Port: {db.port}")
-        print(f"User: {db.user}")
+        print(f"Host: {host}")
+        print(f"Port: {port}")
+        print(f"User: {user}")
         print("Scegliere un'operazione:")
         print("(1) Creare un database")
         print("(2) Eliminare un database")
-        print("(3) Torna al menu principale")
+        print("(3) Modificare un database")
+        print("(4) Mostrare i database presenti")
+        print("(5) Chiudi la connessione")
 
         choice = input("Scelta: ")
         match choice:
@@ -41,7 +37,39 @@ def main():
             case "2":
                 db.delete_database()
             case "3":
-                print("Arrivederci!")
+                modify_database(db)
+            case "4":
+                db.show_list_database()
+            case "5":
+                print("Chiusura connessione al database")
+                db.disconnect()
+                break
+            case _:
+                print("Scelta non valida")
+
+
+def modify_database(db: MySQLDatabase):
+    db.modify_database()
+    while True:
+        print("\nModifica database")
+        print("Scegliere una delle seguenti opzioni:")
+        print("(1) Creare una tabella")
+        print("(2) Eliminare una tabella")
+        print("(3) Modificare una tabella")
+        print("(4) Query personalizzata")
+        print("(5) Chiudi la connessione al database")
+        choice = input("Scelta: ")
+        match choice:
+            case "1":
+                db.create_table()
+            case "2":
+                db.delete_table()
+            case "3":
+                db.modify_table()
+            case "4":
+                db.custom_query()
+            case "5":
+                print("Termine modifica al database")
                 break
             case _:
                 print("Scelta non valida")
