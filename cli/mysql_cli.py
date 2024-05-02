@@ -6,10 +6,10 @@ def main():
     while not temp:
         print("\nMySQL database")
         print("Connessione al database")
-        host = input("Inserire l'host 'localhost' (default): ")
-        port = input("Inserire la porta '3306' (default): ")
-        user = input("Inserire l'username '' (default): ")
-        password = getpass("Inserire la password '' (default): ")
+        host = input("Inserire l'host, 'localhost' (default): ")
+        port = input("Inserire la porta, '3306' (default): ")
+        user = input("Inserire l'username, '' (default): ")
+        password = getpass("Inserire la password, '' (default): ")
         if host == '':
             host = 'localhost'
         if port == '':
@@ -24,10 +24,10 @@ def main():
         print(f"Port: {port}")
         print(f"User: {user}")
         print("Scegliere un'operazione:")
-        print("(1) Creare un database")
-        print("(2) Eliminare un database")
-        print("(3) Modificare un database")
-        print("(4) Mostrare i database presenti")
+        print("(1) Crea un nuovo database")
+        print("(2) Elimina un database")
+        print("(3) Modifica un database")
+        print("(4) Mostra i database presenti")
         print("(5) Chiudi la connessione")
 
         choice = input("Scelta: ")
