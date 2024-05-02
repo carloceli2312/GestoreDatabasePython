@@ -60,6 +60,12 @@ Se la connessione è avvenuta con successo, verrà visualizzato un menu con le s
 4. Visualizza i database presenti
 5. Chiudi la connessione
 
+## Come contribuire
+
+L'obiettivo finale di questo progetto è avere un'applicazione desktop (o magari anche mobile) completa di interfaccia grafica che permetta di lavorare con molteplici tipi di database. Per ora ho implementato soltanto SQLite e MySQL, in futuro implementerò altri tipi di database come: SQL Server, PostgreSQL, Oracle, ecc.
+
+Il software è ancora in fase di sviluppo, infatti il codice potrebbe essere migliorato e ottimizzato, ogni contributo è ben accetto.
+
 ## Licenza
 
 Questo software è rilasciato sotto la licenza MIT. Per ulteriori dettagli, consulta il file [LICENSE](LICENSE).
