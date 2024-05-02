@@ -41,8 +41,7 @@ Se scegli di connetterti a un database SQLite, verrà visualizzato un menu con l
 4. Visualizza i database presenti
 5. Indietro
 
-(1.) Crea un nuovo database ti permette di creare un nuovo database 'database.db' nella cartella 'sqlite_db'.
-(3.) Modifica un database ti permette di connetterti a un database esistente 'database.db' salvato nella cartella 'sqlite_db'.
+I database SQLite su cui si lavorerà saranno tutti salvati nella cartella 'sqlite_db'.
 
 #### MySQL
 
