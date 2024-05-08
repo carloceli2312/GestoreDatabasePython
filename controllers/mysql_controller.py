@@ -1,11 +1,9 @@
 import mysql.connector
 from mysql.connector import Error
 
-from controllers.database_controller import Database
+from controllers.database_controller import DatabaseController
 
-class MySQLDatabase(Database):
-
-    connected = False
+class __MySQLDatabase(DatabaseController):
 
     def __init__(self, host='localhost', port=3306, user='', password=''):
         self.host = host
@@ -15,7 +13,7 @@ class MySQLDatabase(Database):
         self.conn = self.connect()
         self.cursor = self.conn.cursor()
 
-    def connect(self):
+    def connect_database(self):
         try:
             conn = mysql.connector.connect(
                 host=self.host,
@@ -24,16 +22,22 @@ class MySQLDatabase(Database):
                 password=self.password
             )
             print("Connessione al database riuscita")
-            self.connected = True
-            return conn
+            return True
         except Error as e:
             print("Connessione al database fallita")
             print(e)
+            return False
 
-    def disconnect(self):
-        self.conn.close()
-        print("Disconnessione dal database riuscita")
-        self.connected = False
+    def disconnect_database(self):
+        try:
+            self.conn.close()
+            print("Disconnessione dal database riuscita")
+            self.connected = False
+            return True
+        except Error as e:
+            print("Disconnessione al database fallita")
+            print(e)
+            return False
 
     def create_database(self):
         try:

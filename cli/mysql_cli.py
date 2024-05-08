@@ -1,4 +1,4 @@
-from controllers.mysql_controller import MySQLDatabase
+from controllers.database_controller import DatabaseController
 from getpass import getpass
 
 def main():
@@ -14,8 +14,8 @@ def main():
             host = 'localhost'
         if port == '':
             port = 3306
-        db = MySQLDatabase(host, port, user, password)
-        temp = db.connected
+        db = DatabaseController()
+        temp = db.connect_database()
 
     while True:
         print("\nMySQL database")
@@ -37,39 +37,12 @@ def main():
             case "2":
                 db.delete_database()
             case "3":
-                modify_database(db)
+                db.modify_database()
             case "4":
                 db.show_list_database()
             case "5":
                 print("Chiusura connessione al database")
-                db.disconnect()
-                break
-            case _:
-                print("Scelta non valida")
-
-
-def modify_database(db: MySQLDatabase):
-    db.modify_database()
-    while True:
-        print("\nModifica database")
-        print("Scegliere una delle seguenti opzioni:")
-        print("(1) Creare una tabella")
-        print("(2) Eliminare una tabella")
-        print("(3) Modificare una tabella")
-        print("(4) Query personalizzata")
-        print("(5) Chiudi la connessione al database")
-        choice = input("Scelta: ")
-        match choice:
-            case "1":
-                db.create_table()
-            case "2":
-                db.delete_table()
-            case "3":
-                db.modify_table()
-            case "4":
-                db.custom_query()
-            case "5":
-                print("Termine modifica al database")
+                db.disconnect_database()
                 break
             case _:
                 print("Scelta non valida")

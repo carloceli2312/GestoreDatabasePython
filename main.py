@@ -1,3 +1,2 @@
-import cli.main_cli as main_cli
+from logger import logger
 
-main_cli.main()

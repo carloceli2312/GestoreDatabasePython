@@ -1,7 +1,7 @@
-from controllers.sqlite_controller import SQLiteDatabase
+from controllers.database_controller import DatabaseController
 
 def main():
-    db = SQLiteDatabase()
+    db = DatabaseController
 
     while True:
         print("\nSQLite database")

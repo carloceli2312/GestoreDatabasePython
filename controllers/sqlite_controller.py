@@ -1,21 +1,44 @@
 import sqlite3 as sql
 import os
 
-from controllers.database_controller import Database
+from controllers.database_controller import DatabaseController
 
-class SQLiteDatabase(Database):
+class __SQLiteDatabase(DatabaseController):
     def __init__(self):
         self.conn = None
         self.cursor = None
 
-    def create_database(self):
+    def connect_database(self):
         try:
             db_name = input("\nInserire il nome del database: ")
             self.conn = sql.connect("sqlite_db/" + db_name + '.db')
             self.cursor = self.conn.cursor()
             print("Connessione al database riuscita")
+            return True
         except sql.DatabaseError as e:
             print("Connessione al database fallita")
+            print(e)
+            return False
+    
+    def disconnect_database(self):
+        try:
+            self.conn.close()
+            print("Disconnessione dal database riuscita")
+        except sql.DatabaseError as e:
+            print("Disconnessione dal database fallita")
+            print(e)
+
+    def create_database(self):
+        try:
+            self.connect_database()
+            self.cursor = self.conn.cursor()
+            while True:
+                query = input("Inserire la query da eseguire: ")
+                self.cursor.execute(query)
+                print("Query eseguita con successo")
+            print("Database creato con successo")
+        except sql.DatabaseError as e:
+            print("Creazione del database fallita")
             print(e)
     
     def delete_database(self):
